@@ -1,4 +1,5 @@
 import DashboardLayout from "../components/Layout";
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -27,7 +28,9 @@ export default function Home() {
               />
 
             </div>
-            <button className="border border-solid rounded-md w-32 bg-blue-500 mt-4 p-1">Try us for free</button>
+            <Link href='/join-now'>
+              <button className="border border-solid rounded-md w-32 bg-blue-500 mt-4 p-1">Try us for free</button>
+            </Link>
           </div>
           
         </main>

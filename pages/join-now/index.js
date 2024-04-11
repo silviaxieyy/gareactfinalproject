@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, watch } from 'react-hook-form';
 import DashboardLayout from '../../components/Layout';
 import Comfirm from '../../components/Comfirm';
 import emailjs from '@emailjs/browser';
@@ -15,7 +15,7 @@ const JoinNowForm = () => {
   const form = useRef();
 
   const [isComfirmOpen, setIsComfirmOpen] = useState(false)
-  const [formData, setFormData] = useState(null)
+  const [formData, setFormData] = useState([])
 
 
   useEffect(() => emailjs.init("Rl-c-JtkBhUn5hgG_"), []);
@@ -24,7 +24,7 @@ const JoinNowForm = () => {
     setFormData(data);
     setIsComfirmOpen(true);
 
-/*     const {first_name, last_name, email,mobile_number, card_type } = data; */
+/*     const {first_name, Card Type, email,mobile_number, card_type } = data; */
 
     emailjs.sendForm('service_1sf9wj1', 'template_l46463y', form.current, 'Rl-c-JtkBhUn5hgG_')
       .then((result) => {
@@ -37,15 +37,13 @@ const JoinNowForm = () => {
 
   return (
       <DashboardLayout>
-        <div className='flex flex-col items-center mt-20'>    
-          <div className='p-4 rounded-lg '>
-            <div className='flex justify-center items-center'>
-              <h1 className='font-russo-one text-4xl font-bold text-gray-400'>Welcome to Join us</h1>
-            </div>
+        <h1 className='font-russo-one text-center mt-5 text-4xl font-bold text-gray-400'>Welcome to Join us</h1>
+        <div className='flex flex-row justify-center items-center mt-5'>    
+          <div className='flex flex-col p-4 mx-40 rounded-lg bg-blue-100'>
             <form 
               ref={form}
               onSubmit={handleSubmit(onSubmit)}
-              className='mt-6 w-1/3'
+              className='mt-6 w-full'
             >
               <fieldset className="mb-[15px] flex items-center gap-5">
                 <label className="text-violet11 w-[90px] text-right text-[15px]" htmlFor="first-name">
@@ -110,10 +108,45 @@ const JoinNowForm = () => {
                 <input 
                   type="submit"
                   disabled={isSubmitting}
-                  className="border border-solid rounded-xl w-24 bg-sky-500"
+                  className="inline-flex justify-between rounded-md border border-transparent 
+                  bg-blue-400 px-4 py-2 mx-auto text-sm font-medium text-blue-900 hover:bg-blue-200 
+                  focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                 />
               </div>
             </form>
+          </div>
+          <div className='flex flex-col mx-40 flex-shrink-0'>
+            <div className="flex flex-col w-72 h-full max-w-md px-1 py-8 mx-2 sm:px-0">
+                <div className="w-full max-w-md transform mx-auto 
+                  overflow-hidden rounded-2xl bg-white p-6 text-left align-middle 
+                  shadow-xl transition-all">
+                  <p
+                    as="h3"
+                    className="text-lg font-medium leading-6 text-gray-900"
+                  >
+                    SUMMARY  
+                  </p>
+                  <div className="mt-2">
+                    <p className="text-sm text-gray-500">
+                      Your have submit an join form, we will contact you soon.
+                      Please choose a membership now.
+                    </p>
+                    {formData && (
+                      <ul>
+                        <li>First Name : {formData.first_name}</li>
+                        <li>Last Name : {formData.last_name}</li>
+                        <li>Email : {formData.email}</li>
+                        <li>Card Type : {formData.card_type}</li>
+                      </ul>
+                    )
+                    }
+                  
+                  </div>
+                  <div className="flex flex-row mt-4">
+
+                  </div>
+                  </div>
+            </div>
           </div>
         </div>
         <Comfirm 

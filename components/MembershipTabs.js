@@ -70,7 +70,7 @@ export default function MembershipTabs() {
 
   return (
     <div className='flex flex-row justify-center'>
-      <div className='flex flex-col mx-5 flex-shrink-0'>
+      <div className='flex flex-col mx-20 flex-shrink-0'>
         <div className="flex flex-col  max-w-md px-1 py-8 sm:px-0">
           <Tab.Group>
             <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
@@ -135,7 +135,7 @@ export default function MembershipTabs() {
           </Tab.Group>
         </div>
       </div>
-      <div className='flex flex-col mx-5 flex-shrink-0'>
+      <div className='flex flex-col mx-20 flex-shrink-0'>
         <div className="flex flex-col w-72 h-full max-w-md px-1 py-8 mx-2 sm:px-0">
             <div className="w-full max-w-md transform mx-auto 
               overflow-hidden rounded-2xl bg-white p-6 text-left align-middle 

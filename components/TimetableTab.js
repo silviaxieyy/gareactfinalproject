@@ -11,39 +11,27 @@ const TimetableTab = () => {
     register, 
     handleSubmit,
     reset, 
+    setValue,
     formState: { errors, isSubmitting } 
   } = useForm();
 
   const classForm = useRef();
 
-  const [selectedDate, setSelectedDate] = useState(currentDate);
-  const [selectedTime, setSelectedTime] = useState(null);
-  const [selectedClass, setSelectedClass] = useState('');
-
-  
   const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
-
-  
-  const handleTimeChange = (time) => {
-    setSelectedTime(time);
-  };
-
-  
-  const handleClassChange = (e) => {
-    setSelectedClass(e.target.value);
-  };
+    setValue('date', date)
+  }
 
   
   const onSubmit = (e) => {
     
+    emailjs.sendForm('service_1sf9wj1', 'template_s267ry5', classForm .current, 'Rl-c-JtkBhUn5hgG_')
+    .then((result) => {
 
-    
-    console.log('Selected Date:', selectedDate);
-    console.log('Selected Time:', selectedTime);
-    console.log('Selected Class:', selectedClass);
-  };
+      reset();
+    }, (error) => {
+      return <p>There is an error on sending an email!</p>;
+    });
+  }
 
   return (
     <div className='flex flex-col items-center mt-6'>
@@ -54,7 +42,7 @@ const TimetableTab = () => {
       >
         <div className='mt-4'>
           <label className='mr-6'>Class:</label>
-          <select value={selectedClass} onChange={handleClassChange} required>
+          <select {...register('class', {required: true})}>
             <option value="" className='text-center'>-- Select a Class --</option>
             <option value="Yoga" className='text-center'>Yoga</option>
             <option value="Pilates" className='text-center'>Pilates</option>
@@ -64,7 +52,7 @@ const TimetableTab = () => {
         </div>
         <div className='mt-4'>
           <label className='mr-6'>Teacher:</label>
-          <select value={selectedClass} onChange={handleClassChange} required>
+          <select {...register('teacher', {required: true})}>
             <option value="">- Select a Teacher -</option>
             <option value="Yoga" className='text-center'>Alice</option>
             <option value="Pilates" className='text-center'>Judy</option>
@@ -76,7 +64,7 @@ const TimetableTab = () => {
           <label className="text-violet11 w-[90px] text-right text-[15px] mr-6">Date:</label>
           <DatePicker
           className='text-center'
-            selected={selectedDate}
+            selected={currentDate}
             onChange={handleDateChange}
             minDate={currentDate}
             dateFormat="dd-MM-YYYY"
@@ -88,9 +76,7 @@ const TimetableTab = () => {
           <input
             type="time"
             className='ml-5 text-center'
-            value={selectedTime}
-            onChange={e => handleTimeChange(e.target.value)}
-            required
+            {...register('time', {required: true})}
           />
         </div>
         <div className='flex justify-between mt-4'>

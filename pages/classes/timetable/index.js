@@ -1,8 +1,10 @@
-import React from 'react'
+import { useState } from 'react'
 import DashboardLayout from '../../../components/Layout'
 import TimetableTab from '../../../components/TimetableTab'
 
+
 const Timetable = () => {
+
   return (
     <div>
       <DashboardLayout>

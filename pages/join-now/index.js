@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react';
-import {NextResponse} from "next/server"
 import { useForm } from 'react-hook-form';
 import DashboardLayout from '../../components/Layout';
 import Comfirm from '../../components/Comfirm';
@@ -15,7 +14,7 @@ const JoinNowForm = () => {
 
   const form = useRef();
 
-  const [iscomfirmOpen, setIsComfirmOpen] = useState(false)
+  const [isComfirmOpen, setIsComfirmOpen] = useState(false)
   const [formData, setFormData] = useState(null)
 
 
@@ -29,11 +28,10 @@ const JoinNowForm = () => {
 
     emailjs.sendForm('service_1sf9wj1', 'template_l46463y', form.current, 'Rl-c-JtkBhUn5hgG_')
       .then((result) => {
+
         reset();
-        return <p>We have sent you an email. Thanks for join us!</p>;
-        setIsComfirmOpen(false);
       }, (error) => {
-        return <p>There is an error on sending a email!</p>;
+        return <p>There is an error on sending an email!</p>;
       });
   }
 
@@ -102,6 +100,7 @@ const JoinNowForm = () => {
                     Card Type
                 </label>
                 <select id="card-type" {...register("card_type", { required: true })}>
+                  <option value="weekly">Weekly</option>
                   <option value="Monthly">Monthly</option>
                   <option value="Annually">Anually</option>
                 </select>
@@ -117,14 +116,11 @@ const JoinNowForm = () => {
             </form>
           </div>
         </div>
-        
-        {iscomfirmOpen && 
-          <Comfirm 
-          isOpen={iscomfirmOpen} 
-          onClose={() => setIsComfirmOpen(false)} 
-          formData={formData}
-        />
-        }
+        <Comfirm 
+        isOpen={isComfirmOpen}
+        onClose={() => setIsComfirmOpen(false)} 
+        formData={formData}
+      />
         
 
       </DashboardLayout>

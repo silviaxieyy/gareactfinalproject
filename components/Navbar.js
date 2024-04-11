@@ -28,7 +28,7 @@ export default function Navbar() {
             </div>
           </Menu>
           </div>
-          <div className="w-50 mx-auto">
+{/*           <div className="w-50 mx-auto">
             <Menu as="div" className="relative inline-block text-left mx-50">
               <div>
                 <Menu.Button className="inline-flex w-full justify-center rounded-md 
@@ -42,7 +42,7 @@ export default function Navbar() {
                 </Menu.Button>
               </div>
             </Menu>
-          </div>
+          </div> */}
           <div className="w-50 mx-auto">
             <Menu as="div" className="relative inline-block text-left mx-50">
               <div>
@@ -174,7 +174,7 @@ export default function Navbar() {
                 bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 
                 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75" 
             >
-              <Link href="/join-now1">
+              <Link href="/join-now">
                 Join Now
               </Link>
             </button>

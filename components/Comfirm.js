@@ -1,15 +1,18 @@
+import { useRouter } from 'next/router';
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
+import Link from 'next/link'
 
-export default function Comfirm() {
-  let [isOpen, setIsOpen] = useState(true)
+export default function Comfirm({isOpen, onClose}) {
+  const router = useRouter();
 
   function closeModal() {
-    setIsOpen(false)
+    onClose();
   }
 
-  function openModal() {
-    setIsOpen(true)
+  const handleChooseMembership = () => {
+    closeModal();
+    router.push("/memberships");
   }
 
   return (
@@ -44,11 +47,12 @@ export default function Comfirm() {
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                   >
-                    Payment successful
+                    Join successfully
                   </Dialog.Title>
                   <div className="mt-2">
                     <p className="text-sm text-gray-500">
                       Your have submit an join form, we will contact you soon.
+                      Please choose a membership now.
                     </p>
                     <p></p>
 
@@ -57,11 +61,24 @@ export default function Comfirm() {
                   <div className="mt-4">
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}
+                      className="inline-flex justify-center rounded-md border border-transparent 
+                        bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 
+                        focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      onClick={handleChooseMembership}
                     >
-                      Got it!
+                      Choose Membership
                     </button>
+                    <Link href='/'>
+                      <button
+                        type="button"
+                        className="inline-flex justify-center rounded-md border border-transparent 
+                          bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 
+                          focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                        onClick={closeModal}
+                      >
+                        Cancel
+                      </button>
+                    </Link>
                   </div>
                 </Dialog.Panel>
               </Transition.Child>

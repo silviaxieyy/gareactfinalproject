@@ -1,5 +1,6 @@
 import React from 'react'
 import DashboardLayout from '../../components/Layout'
+import Link from 'next/link'
 
 const Why = () => {
   return (
@@ -34,7 +35,9 @@ const Why = () => {
               />
 
             </div>
-            <button className="border border-solid rounded-md w-32 bg-blue-500 mt-4 p-1">Try us for free</button>
+            <Link href='/join-now'>
+              <button className="border border-solid rounded-md w-32 bg-blue-500 mt-4 p-1">Try us for free</button>
+            </Link>
           </div>
           
         </main>

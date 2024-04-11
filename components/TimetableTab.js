@@ -12,6 +12,7 @@ const TimetableTab = () => {
     handleSubmit,
     reset, 
     setValue,
+    watch,
     formState: { errors, isSubmitting } 
   } = useForm();
 
@@ -24,7 +25,7 @@ const TimetableTab = () => {
   
   const onSubmit = (e) => {
     
-    emailjs.sendForm('service_1sf9wj1', 'template_s267ry5', classForm .current, 'Rl-c-JtkBhUn5hgG_')
+    emailjs.sendForm('service_1sf9wj1', 'template_s267ry5', classForm.current, 'Rl-c-JtkBhUn5hgG_')
     .then((result) => {
 
       reset();
@@ -47,24 +48,25 @@ const TimetableTab = () => {
             <option value="Yoga" className='text-center'>Yoga</option>
             <option value="Pilates" className='text-center'>Pilates</option>
             <option value="HIIT" className='text-center'>HIIT</option>
-            <option value="CYCLE" className='text-center'>Bike</option>
+            <option value="Bike" className='text-center'>Bike</option>
           </select>
         </div>
         <div className='mt-4'>
           <label className='mr-6'>Teacher:</label>
           <select {...register('teacher', {required: true})}>
             <option value="">- Select a Teacher -</option>
-            <option value="Yoga" className='text-center'>Alice</option>
-            <option value="Pilates" className='text-center'>Judy</option>
-            <option value="HIIT" className='text-center'>Bill</option>
-            <option value="CYCLE" className='text-center'>Michael</option>
+            <option value="Alice" className='text-center'>Alice</option>
+            <option value="Judy" className='text-center'>Judy</option>
+            <option value="Bill" className='text-center'>Bill</option>
+            <option value="Michael" className='text-center'>Michael</option>
           </select>
         </div>
         <div className='mt-4'>
           <label className="text-violet11 w-[90px] text-right text-[15px] mr-6">Date:</label>
           <DatePicker
-          className='text-center'
-            selected={currentDate}
+            selected={watch('date')}
+            className='text-center'
+            {...register('date', { required: true })}
             onChange={handleDateChange}
             minDate={currentDate}
             dateFormat="dd-MM-YYYY"

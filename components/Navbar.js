@@ -2,23 +2,27 @@ import { Menu, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link';
+import Btn from './Btn';
+import { useSession} from "next-auth/react"
+
 
 export default function Navbar() {
+  const { data: session } = useSession()
 
   return (
     <div className='flex flex-col h-20 bg-sky-50'> 
       <div className='flex justify-between items-center h-full px-2 w-full '>
-        <div className='flex w-1/6'>
+        <div className='flex w-1/5'>
           <Link href="/">
             <img src="/logo.png"  alt="logo" className='scale-50' />
           </Link>
         </div>
-        <div className='flex w-4/6'>
+        <div className='hidden flex w-3/5 md:flex'>
           <div className="w-50 mx-auto over-flow-hidden">
           <Menu as="div" className="relative inline-block text-left mx-50">
             <div>
               <Menu.Button className="inline-flex w-full justify-center rounded-md 
-              bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 
+              bg-black/20 px-4 py-2 whitespace-nowrap text-sm font-medium text-white hover:bg-black/30 
               focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
               >
                 <Link href="/why">
@@ -167,17 +171,22 @@ export default function Navbar() {
             </Menu>
           </div>
         </div>
-        <div className='flex w-1/6'>
-          <div className="w-50 mx-auto">
+        <div className='flex w-2/5 items-center'>
+          <div className="w-24 mx-auto h-1/2">
             <button 
-              className="inline-flex w-full justify-center rounded-md bg-blue-500
-                bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 
+              className="hidden md:flex inline-flex w-full justify-center items-center rounded-md bg-blue-500
+                bg-black/20 px-2 py-2 mx-2 whitespace-nowrap text-sm font-medium text-white hover:bg-black/30 
                 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75" 
             >
               <Link href="/join-now">
                 Join Now
               </Link>
             </button>
+          </div>
+          <div className="mx-auto h-1/2">
+            <div>
+              <Btn session={session} />
+            </div>
           </div>
         </div>
       </div>

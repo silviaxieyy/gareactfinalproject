@@ -15,7 +15,7 @@ export default function Btn({session}) {
           >
             Sign Out
           </button>
-          <div className="px-2 " >
+          <div className="px-2 w-24 " >
             <img 
             src={session.user.image} 
             alt="User Image"

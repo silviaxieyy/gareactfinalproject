@@ -1,11 +1,14 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useForm } from 'react-hook-form'
 import emailjs from '@emailjs/browser';
+import { useSession} from "next-auth/react"
 
 const TimetableTab = () => {
   const currentDate = new Date();
+  const { data: session } = useSession()
+  
   
   const { 
     register, 
@@ -23,8 +26,13 @@ const TimetableTab = () => {
   }
 
   
-  const onSubmit = (e) => {
-    
+  const onSubmit = (data) => {
+    data.email = session.user.email;
+    data.name = session.user.name;
+    console.log(data.email)
+    console.log(data.name)
+    console.log(classForm.current)
+
     emailjs.sendForm('service_1sf9wj1', 'template_s267ry5', classForm.current, 'Rl-c-JtkBhUn5hgG_')
     .then((result) => {
 
@@ -41,9 +49,12 @@ const TimetableTab = () => {
         ref={classForm}
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className='mt-4'>
-          <label className='mr-6'>Class:</label>
-          <select {...register('class', {required: true})}>
+        <div className='flex flex-col mt-4'>
+          <label className='flex mr-6 my-4 text-xl'>Class:</label>
+          <select 
+            {...register('class', {required: true})}
+            className='w-64 min-h-10 text-xl'
+          >
             <option value="" className='text-center'>-- Select a Class --</option>
             <option value="Yoga" className='text-center'>Yoga</option>
             <option value="Pilates" className='text-center'>Pilates</option>
@@ -51,9 +62,12 @@ const TimetableTab = () => {
             <option value="Bike" className='text-center'>Bike</option>
           </select>
         </div>
-        <div className='mt-4'>
-          <label className='mr-6'>Teacher:</label>
-          <select {...register('teacher', {required: true})}>
+        <div className='flex flex-col mt-4'>
+          <label className='flex mr-6 my-4 text-xl'>Teacher:</label>
+          <select 
+            {...register('teacher', {required: true})}
+            className='w-64 min-h-10 text-xl'
+          >
             <option value="">- Select a Teacher -</option>
             <option value="Alice" className='text-center'>Alice</option>
             <option value="Judy" className='text-center'>Judy</option>
@@ -61,11 +75,11 @@ const TimetableTab = () => {
             <option value="Michael" className='text-center'>Michael</option>
           </select>
         </div>
-        <div className='mt-4'>
-          <label className="text-violet11 w-[90px] text-right text-[15px] mr-6">Date:</label>
+        <div className='flex flex-col mt-2'>
+          <label className="flex mr-6 my-4 text-xl">Date:</label>
           <DatePicker
             selected={watch('date')}
-            className='text-center'
+            className='w-64 min-h-10 text-xl text-center'
             {...register('date', { required: true })}
             onChange={handleDateChange}
             minDate={currentDate}
@@ -73,18 +87,50 @@ const TimetableTab = () => {
             required
           />
         </div>
-        <div className='mt-4'>
-          <label>Time:</label>
+        <div className='flex flex-col'>
+          <label className='flex mr-6 my-4 text-xl'>Time:</label>
           <input
             type="time"
-            className='ml-5 text-center'
+            className='w-64 min-h-10 text-xl text-center'
             {...register('time', {required: true})}
           />
         </div>
-        <div className='flex justify-between mt-4'>
+        <div className='flex flex-col mt-2'>
+          <label className='flex mr-6 my-4 text-xl'>Email:</label>
+          {session ?
+            <input 
+              type='email'
+              className='w-64 min-h-10 text-xl text-center'
+              defaultValue={session.user.email}
+              {...register('email', {required: true})}
+            />
+            : <input
+                type='email'
+                className='w-64 min-h-10 text-xl text-center'
+                {...register('email', {required: true})}
+              />
+          }
+        </div>
+        <div className='flex flex-col mt-2'>
+          <label className='flex mr-6 my-4 text-xl'>User Name:</label>
+          {session ?
+            <input 
+              type='text'
+              className='w-64 min-h-10 text-xl text-center'
+              defaultValue={session.user.name}
+              {...register('name', {required: true})}
+            />
+            : <input
+                type='text'
+                className='w-64 min-h-10 text-xl text-center'
+                {...register('name', {required: true})}
+              />
+          }
+        </div>
+        <div className='flex justify-between mt-6'>
           <div></div>
           <button type="submit"
-            className="border border-solid rounded-xl w-24 bg-sky-100"
+            className="border border-solid rounded-xl w-24 min-h-10 bg-sky-400"
           >
             Submit
           </button>

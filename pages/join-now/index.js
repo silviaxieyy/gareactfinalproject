@@ -3,6 +3,7 @@ import { useForm, watch } from 'react-hook-form';
 import DashboardLayout from '../../components/Layout';
 import Comfirm from '../../components/Comfirm';
 import emailjs from '@emailjs/browser';
+import { useSession } from "next-auth/react"
 
 const JoinNowForm = () => {
   const { 
@@ -13,6 +14,8 @@ const JoinNowForm = () => {
   } = useForm();
 
   const form = useRef();
+  const { data: session } = useSession()
+  
 
   const [isComfirmOpen, setIsComfirmOpen] = useState(false)
   const [formData, setFormData] = useState([])
@@ -21,6 +24,7 @@ const JoinNowForm = () => {
   useEffect(() => emailjs.init("Rl-c-JtkBhUn5hgG_"), []);
 
   const onSubmit = (data, event) => {
+    
     setFormData(data);
     setIsComfirmOpen(true);
 
@@ -39,14 +43,14 @@ const JoinNowForm = () => {
       <DashboardLayout>
         <h1 className='font-russo-one text-center mt-5 text-4xl font-bold text-gray-400'>Welcome to Join us</h1>
         <div className='flex flex-row justify-center items-center mt-5'>    
-          <div className='flex flex-col p-4 mx-40 rounded-lg bg-blue-100'>
+          <div className='flex flex-col p-4 text-2xl  mx-40 rounded-lg bg-blue-100'>
             <form 
               ref={form}
               onSubmit={handleSubmit(onSubmit)}
               className='mt-6 w-full'
             >
-              <fieldset className="mb-[15px] flex items-center gap-5">
-                <label className="text-violet11 w-[90px] text-right text-[15px]" htmlFor="first-name">
+              <fieldset className="mb-[15px] flex flex-col items-center gap-5">
+                <label className="text-violet11 w-[90px] text-left whitespace-nowrap text-2xl" htmlFor="first-name">
                   First Name
                 </label>
                 <input 
@@ -56,8 +60,8 @@ const JoinNowForm = () => {
                   
                 />
               </fieldset>
-              <fieldset className="mb-[15px] flex items-center gap-5">
-                <label className="text-violet11 w-[90px] text-right text-[15px]" htmlFor="last-name">
+              <fieldset className="mb-[15px] flex flex-col items-center gap-5">
+                <label className="text-violet11 w-[90px] text-left whitespace-nowrap text-2xl" htmlFor="last-name">
                     Last Name
                 </label>
                 <input type="text" 
@@ -65,15 +69,23 @@ const JoinNowForm = () => {
                   id="last-name" 
                   {...register("last_name", {required: true, max: 20, min: 2})} />
               </fieldset>
-              <fieldset className="mb-[15px] flex items-center gap-5">
-                <label className="text-violet11 w-[90px] text-right text-[15px]" htmlFor="email">
+              <fieldset className="mb-[15px] flex flex-col items-center gap-5">
+                <label className="text-violet11 w-[90px] text-left whitespace-nowrap text-2xl" htmlFor="email">
                     Email
                 </label>
-                <input 
-                  type="email" 
-                  id='email'
-                  placeholder="Email" {...register("email", {required: true})} 
-                />
+                {session ?
+                  <input 
+                    type='email'
+                    className='w-64 min-h-10 text-xl text-center'
+                    defaultValue={session.user.email}
+                    {...register('name', {required: true})}
+                  />
+                  : <input
+                      type='email'
+                      className='w-64 min-h-10 text-xl text-center'
+                      {...register('email', {required: true})}
+                    />
+                }
               </fieldset>
 
 {/*               <fieldset className="mb-[15px] flex items-center gap-5">
@@ -93,8 +105,8 @@ const JoinNowForm = () => {
                 />
               </fieldset> */}
 
-              <fieldset className="mb-[15px] flex items-center gap-5">
-                <label className="text-violet11 w-[90px] text-right text-[15px]" htmlFor="card-type">
+              <fieldset className="mb-[15px] flex flex-col items-center gap-5">
+                <label className="text-violet11 w-[90px] text-left whitespace-nowrap text-2xl" htmlFor="card-type">
                     Card Type
                 </label>
                 <select id="card-type" {...register("card_type", { required: true })}>
@@ -115,7 +127,7 @@ const JoinNowForm = () => {
               </div>
             </form>
           </div>
-          <div className='flex flex-col mx-40 flex-shrink-0'>
+          <div className='hidden md:flex flex-col mx-40 flex-shrink-0'>
             <div className="flex flex-col w-72 h-full max-w-md px-1 py-8 mx-2 sm:px-0">
                 <div className="w-full max-w-md transform mx-auto 
                   overflow-hidden rounded-2xl bg-white p-6 text-left align-middle 

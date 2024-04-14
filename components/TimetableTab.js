@@ -44,16 +44,15 @@ const TimetableTab = () => {
 
   return (
     <div className='flex flex-col items-center mt-6'>
-      <h1 className='font-russo-one text-4xl font-bold text-gray-400'>Book a Class</h1>
       <form 
         ref={classForm}
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className='flex flex-col mt-4'>
-          <label className='flex mr-6 my-4 text-xl'>Class:</label>
+        <div className='flex flex-row mt-4'>
+          <label className='flex w-24 mr-6 my-4 text-2xl'>Class:</label>
           <select 
             {...register('class', {required: true})}
-            className='w-64 min-h-10 text-xl'
+            className='w-64 h-14 text-2xl'
           >
             <option value="" className='text-center'>-- Select a Class --</option>
             <option value="Yoga" className='text-center'>Yoga</option>
@@ -62,24 +61,24 @@ const TimetableTab = () => {
             <option value="Bike" className='text-center'>Bike</option>
           </select>
         </div>
-        <div className='flex flex-col mt-4'>
-          <label className='flex mr-6 my-4 text-xl'>Teacher:</label>
+        <div className='flex flex-row mt-4'>
+          <label className='flex w-24 mr-6 my-4 text-2xl'>Teacher:</label>
           <select 
             {...register('teacher', {required: true})}
-            className='w-64 min-h-10 text-xl'
+            className='w-64 h-14 text-2xl text-center'
           >
-            <option value="">- Select a Teacher -</option>
+            <option value="">-- Select a Teacher --</option>
             <option value="Alice" className='text-center'>Alice</option>
             <option value="Judy" className='text-center'>Judy</option>
             <option value="Bill" className='text-center'>Bill</option>
             <option value="Michael" className='text-center'>Michael</option>
           </select>
         </div>
-        <div className='flex flex-col mt-2'>
-          <label className="flex mr-6 my-4 text-xl">Date:</label>
+        <div className='flex flex-row mt-4'>
+          <label className="flex w-24 mr-6 my-4 text-2xl">Date:</label>
           <DatePicker
             selected={watch('date')}
-            className='w-64 min-h-10 text-xl text-center'
+            className='w-64 h-14 text-2xl text-center'
             {...register('date', { required: true })}
             onChange={handleDateChange}
             minDate={currentDate}
@@ -87,42 +86,42 @@ const TimetableTab = () => {
             required
           />
         </div>
-        <div className='flex flex-col'>
-          <label className='flex mr-6 my-4 text-xl'>Time:</label>
+        <div className='flex flex-row mt-4'>
+          <label className='flex w-24 mr-6 my-4 text-2xl'>Time:</label>
           <input
             type="time"
-            className='w-64 min-h-10 text-xl text-center'
+            className='w-64 h-14 text-2xl text-center'
             {...register('time', {required: true})}
           />
         </div>
-        <div className='flex flex-col mt-2'>
-          <label className='flex mr-6 my-4 text-xl'>Email:</label>
+        <div className='flex flex-row mt-4'>
+          <label className='flex w-24 mr-6 my-4 text-2xl'>Email:</label>
           {session ?
             <input 
               type='email'
-              className='w-64 min-h-10 text-xl text-center'
+              className='w-64 min-h-10 text-2xl text-center'
               defaultValue={session.user.email}
               {...register('email', {required: true})}
             />
             : <input
                 type='email'
-                className='w-64 min-h-10 text-xl text-center'
+                className='w-64 h-14 text-2xl text-center'
                 {...register('email', {required: true})}
               />
           }
         </div>
-        <div className='flex flex-col mt-2'>
-          <label className='flex mr-6 my-4 text-xl'>User Name:</label>
+        <div className='flex flex-row mt-4'>
+          <label className='flex w-24 mr-6 my-4 text-2xl'>Name:</label>
           {session ?
             <input 
               type='text'
-              className='w-64 min-h-10 text-xl text-center'
+              className='w-64 h-14 text-2xl text-center'
               defaultValue={session.user.name}
               {...register('name', {required: true})}
             />
             : <input
                 type='text'
-                className='w-64 min-h-10 text-xl text-center'
+                className='w-64 h-14 text-2xl text-center'
                 {...register('name', {required: true})}
               />
           }
@@ -130,7 +129,7 @@ const TimetableTab = () => {
         <div className='flex justify-between mt-6'>
           <div></div>
           <button type="submit"
-            className="border border-solid rounded-xl w-24 min-h-10 bg-sky-400"
+            className="border border-solid rounded-xl w-48 text-2xl h-14 bg-sky-400"
           >
             Submit
           </button>

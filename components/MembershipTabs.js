@@ -1,4 +1,4 @@
-import { useState} from 'react'
+import { useState,useEffect } from 'react'
 import { Tab } from '@headlessui/react'
 import Link from 'next/link'
 
@@ -9,7 +9,12 @@ function classNames(...classes) {
 
 export default function MembershipTabs() {
   const [selectedCategory, setSelectedCategory] = useState('BLUE');
+  const [selectedMembership, setSelectedMembership] = useState();
   const [type, setType] = useState({});
+
+  useEffect(() => {
+    console.log("selectedMembership: ", selectedMembership)
+  },[selectedMembership])
 
   const [categories] = useState({
     BLUE: [
@@ -22,7 +27,7 @@ export default function MembershipTabs() {
       },
       {
         id: 'Blue-Premium',
-        title: 'Access one gym and amenities only and all training classes',
+        title: 'Access one gym and amenities with training classes',
         price: '$22.9',
         period: "per week",
         starting: '4 weeks at least',
@@ -38,7 +43,7 @@ export default function MembershipTabs() {
       },
       {
         id: 'Platnum-Premium',
-        title: 'Access to statewide gyms and amenities only',
+        title: 'Access to statewide gyms and amenities with training classes',
         price: '$26.9',
         period: "per week",
         starting: '4 weeks at least',
@@ -54,7 +59,7 @@ export default function MembershipTabs() {
       },
       {
         id: 'Plus-Ultimate',
-        title: 'Access to nationwide gyms and amenities and all traing classes',
+        title: 'Access to nationwide gyms, amenities with training classes',
         price: '33.9',
         period: "per week",
         starting: '4 weeks at least',
@@ -68,18 +73,25 @@ export default function MembershipTabs() {
     setType(selecetedType);
   }
 
+  const handleMembershipClick = (membership) => {
+    setSelectedMembership(membership)
+    console.log(membership)
+    console.log(membership.title)
+    console.log(membership.price)
+  }
+
   return (
-    <div className='flex flex-row justify-center'>
-      <div className='flex flex-col mx-20 flex-shrink-0'>
-        <div className="flex flex-col  max-w-md px-1 py-8 sm:px-0">
-          <Tab.Group>
-            <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
+    <div className='flex flex-row justify-betwen'>
+      <div className='flex flex-col mx-10 flex-shrink-0'>
+        <div className="flex flex-col max-w-xl px-1 py-8 sm:px-0">
+          <Tab.Group defaultIndex={1}>
+            <Tab.List className="flex space-x-1 h-24 w-xl rounded-xl bg-blue-900/20 p-1">
               {Object.keys(categories).map((category, index) => (
                 <Tab
                   key={index}
                   className={({ selected }) =>
                     classNames(
-                      'w-full rounded-lg py-2.5 text-sm font-medium leading-5',
+                      'w-full rounded-lg py-2.5 text-2xl font-medium leading-5',
                       'ring-white/60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
                       selected
                         ? 'bg-white text-blue-700 shadow'
@@ -93,34 +105,35 @@ export default function MembershipTabs() {
               ))}
             </Tab.List>
             <Tab.Panels className="mt-2">
-              {Object.values(categories).map((posts, idx) => (
+              {Object.entries(categories).map(([category, memberships], idx) => (
                 <Tab.Panel
                   key={idx}
                   className={classNames(
                     'rounded-xl bg-white p-3',
-                    'ring-white/60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2'
+                    'ring-white/60 ring-offset-2 h-80 ring-offset-blue-400 focus:outline-none focus:ring-2'
                   )}
                 >
                   <ul>
-                    {posts.map((post) => (
+                    {memberships.map((membership) => (
                       <li
-                        key={post.id}
+                        key={membership.id}
                         className="relative text-gray-700 rounded-md p-3 hover:bg-gray-100"
+                        onClick={() => handleMembershipClick(membership)}
                       >
-                        <h3 className="text-lg font-medium leading-5">
-                          {post.title}
+                        <h3 className="lg:text-2xl md:text-3xl sm:text-xl font-medium leading-8 mt-5">
+                          {membership.title}
                         </h3>
 
                         <ul className="mt-1 flex flex-wraps items-center space-x-1 text-base font-normal leading-4 text-gray-500">
-                          <li className='text-lg text-cyan-400 '>AUD {post.price}</li>
-                          <li className='mx-auto'>&middot;</li>
-                          <li>{post.period}</li>
-                          <li>&middot;</li>
-                          <li>{post.starting} </li>
+                          <li className='lg:text-2xl md:text-lg sm:text-lg text-cyan-400 mx-6 mt-5'>AUD {membership.price}</li>
+                          <li className='lg:text-2xl md:text-lg sm:text-lg mt-5 mx-6'>&middot;</li>
+                          <li className='lg:text-2xl md:text-lg sm:text-lg mt-5 mx-6'>{membership.period}</li>
+                          <li className='lg:text-2xl md:text-lg sm:text-lg mt-5 mx-6'>&middot;</li>
+                          <li className='lg:text-2xl md:text-lg sm:text-lg mt-5 mx-6'>{membership.starting} </li>
                         </ul>
 
                         <a
-                          href="#"
+                          href='#'
                           className={classNames(
                             'absolute inset-0 rounded-md',
                             'ring-blue-400 focus:z-10 focus:outline-none focus:ring-2'
@@ -135,41 +148,48 @@ export default function MembershipTabs() {
           </Tab.Group>
         </div>
       </div>
-      <div className='flex flex-col mx-20 flex-shrink-0'>
-        <div className="flex flex-col w-72 h-full max-w-md px-1 py-8 mx-2 sm:px-0">
-            <div className="w-full max-w-md transform mx-auto 
-              overflow-hidden rounded-2xl bg-white p-6 text-left align-middle 
-              shadow-xl transition-all">
+      <div className='flex flex-col mx-20  flex-shrink-0'>
+        <div className="hidden sm:flex flex-col w-96  h-96 px-1 py-8 mx-2 sm:px-0">
+            <div 
+              className="w-full max-w-2xl rounded-2xl bg-white p-6 text-left">
               <p
                 as="h3"
-                className="text-lg font-medium leading-6 text-gray-900"
+                className="text-2xl text-center font-medium leading-6 text-gray-900"
               >
                 SUMMARY  
               </p>
               <div className="mt-2">
-                <p className="text-sm text-gray-500">
+                <p className="text-xl text-gray-500">
                   Your have submit an join form, we will contact you soon.
                   Please choose a membership now.
                 </p>
-                <p className='text-gray-700 mt-2'>Type:  {selectedCategory}</p>
+                <p className='mt-2 text-xl text-gray-700'>Type: {selectedCategory}</p>
+                {selectedMembership && (<ul>
+                  <li className='mt-2 text-xl text-gray-700'>Level:  {selectedMembership.id}</li>
+                  <li className='mt-2 text-xl text-gray-700'>Title: {selectedMembership.title}</li>
+                  <li className='mt-2 text-xl text-gray-700'>Period: {selectedMembership.period}</li>
+                  <li className='mt-2 text-xl text-gray-700'>Starting: {selectedMembership.starting}</li>
+                </ul>)
+                }
               </div>
               <div className="flex flex-row mt-4">
-                <button
-                  type="button"
-                  className="inline-flex justify-between rounded-md border border-transparent 
-                    bg-blue-100 px-4 py-2 mx-auto text-sm font-medium text-blue-900 hover:bg-blue-200 
-                    focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-      /*                         onClick={handlePayment} */
-                >
-                  Go and Pay
-                </button>
+                <Link href='/payment'>
+                  <button
+                    type="button"
+                    className="inline-flex justify-between rounded-md border border-transparent 
+                      bg-blue-100 px-4 py-2 mx-auto text-xl font-medium text-blue-900 hover:bg-blue-200 
+                      focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                  >
+                    Go and Pay
+                  </button>
+                </Link>
                 <Link 
                   className='mx-auto'
                   href='/'>
                   <button
                     type="button"
                     className="inline-flex justify-center rounded-md border border-transparent 
-                      bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 
+                      bg-blue-100 px-4 py-2 text-xl font-medium text-blue-900 hover:bg-blue-200 
                       focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                   >
                     Cancel

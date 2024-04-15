@@ -151,7 +151,7 @@ const JoinNowForm = () => {
               </p>
               <div className="mt-2">
                 <p className="text-xl mt-5 text-gray-500">
-                  Your have submit an join form, we will contact you soon.
+                  Your have submitted a join form, we will contact you soon.
                   Please choose a membership now.
                 </p>
                 {formData && (

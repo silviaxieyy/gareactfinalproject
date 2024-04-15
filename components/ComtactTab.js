@@ -8,7 +8,7 @@ export default function ComtactTab() {
         <Disclosure defaultOpen>
           {({ open }) => (
             <>
-              <Disclosure.Button className="flex w-full justify-between rounded-lg bg-purple-100 px-4 py-2 text-left text-sm font-medium text-purple-900 hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
+              <Disclosure.Button className="flex w-full justify-between rounded-lg bg-purple-100 px-4 py-2 text-left text-xl font-medium text-purple-900 hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
                 <span>Phone Number</span>
                 <ChevronUpIcon
                   className={`${
@@ -16,7 +16,7 @@ export default function ComtactTab() {
                   } h-5 w-5 text-purple-500`}
                 />
               </Disclosure.Button>
-              <Disclosure.Panel className="px-4 pb-2 pt-4 text-sm text-gray-500">
+              <Disclosure.Panel className="px-4 pb-2 pt-4 text-xl text-gray-500">
                 Feel free to contact us: 04010203xx
               </Disclosure.Panel>
             </>
@@ -25,7 +25,7 @@ export default function ComtactTab() {
         <Disclosure as="div" className="mt-2" defaultOpen>
           {({ open }) => (
             <>
-              <Disclosure.Button className="flex w-full justify-between rounded-lg bg-purple-100 px-4 py-2 text-left text-sm font-medium text-purple-900 hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
+              <Disclosure.Button className="flex w-full justify-between rounded-lg bg-purple-100 px-4 py-2 text-left text-xl font-medium text-purple-900 hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
                 <span>Email</span>
                 <ChevronUpIcon
                   className={`${
@@ -33,7 +33,7 @@ export default function ComtactTab() {
                   } h-5 w-5 text-purple-500`}
                 />
               </Disclosure.Button>
-              <Disclosure.Panel className="px-4 pb-2 pt-4 text-sm text-gray-500">
+              <Disclosure.Panel className="px-4 pb-2 pt-4 text-xl text-gray-500">
                 superfit_au@gmail.com
               </Disclosure.Panel>
             </>
@@ -42,7 +42,7 @@ export default function ComtactTab() {
         <Disclosure as="div" className="mt-2" defaultOpen>
           {({ open }) => (
             <>
-              <Disclosure.Button className="flex w-full justify-between rounded-lg bg-purple-100 px-4 py-2 text-left text-sm font-medium text-purple-900 hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
+              <Disclosure.Button className="flex w-full justify-between rounded-lg bg-purple-100 px-4 py-2 text-left text-xl font-medium text-purple-900 hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
                 <span>Address</span>
                 <ChevronUpIcon
                   className={`${
@@ -50,7 +50,7 @@ export default function ComtactTab() {
                   } h-5 w-5 text-purple-500`}
                 />
               </Disclosure.Button>
-              <Disclosure.Panel className="px-4 pb-2 pt-4 text-sm text-gray-500">
+              <Disclosure.Panel className="px-4 pb-2 pt-4 text-xl text-gray-500">
                 xx Queen Street Melbourne VIC 3000
               </Disclosure.Panel>
             </>

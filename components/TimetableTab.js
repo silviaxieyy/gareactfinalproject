@@ -27,8 +27,8 @@ const TimetableTab = () => {
 
   
   const onSubmit = (data) => {
-    data.email = session.user.email;
-    data.name = session.user.name;
+    data.email = session?.user.email;
+    data.name = session?.user.name;
     console.log(data.email)
     console.log(data.name)
     console.log(classForm.current)

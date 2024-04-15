@@ -160,7 +160,7 @@ export default function MembershipTabs() {
               </p>
               <div className="mt-2">
                 <p className="text-xl text-gray-500">
-                  Your have submit an join form, we will contact you soon.
+                  Your have submitted a join form, we will contact you soon.
                   Please choose a membership now.
                 </p>
                 <p className='mt-2 text-xl text-gray-700'>Type: {selectedCategory}</p>

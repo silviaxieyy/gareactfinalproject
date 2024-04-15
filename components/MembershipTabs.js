@@ -149,9 +149,9 @@ export default function MembershipTabs() {
         </div>
       </div>
       <div className='flex flex-col mx-20  flex-shrink-0'>
-        <div className="hidden sm:flex flex-col w-96  h-96 px-1 py-8 mx-2 sm:px-0">
+        <div className="hidden sm:flex max-w-lg flex-col px-5 py-8 mx-2 sm:px-0">
             <div 
-              className="w-full max-w-2xl rounded-2xl bg-white p-6 text-left">
+              className="w-full rounded-2xl bg-white p-6 text-left">
               <p
                 as="h3"
                 className="text-2xl text-center font-medium leading-6 text-gray-900"
@@ -166,7 +166,8 @@ export default function MembershipTabs() {
                 <p className='mt-2 text-xl text-gray-700'>Type: {selectedCategory}</p>
                 {selectedMembership && (<ul>
                   <li className='mt-2 text-xl text-gray-700'>Level:  {selectedMembership.id}</li>
-                  <li className='mt-2 text-xl text-gray-700'>Title: {selectedMembership.title}</li>
+                  <li className='mt-2 text-xl text-blue-400'>Price:  {selectedMembership.price}</li>
+                  <li className='mt-2 text-xl text-gray-700'>Detail: {selectedMembership.title}</li>
                   <li className='mt-2 text-xl text-gray-700'>Period: {selectedMembership.period}</li>
                   <li className='mt-2 text-xl text-gray-700'>Starting: {selectedMembership.starting}</li>
                 </ul>)

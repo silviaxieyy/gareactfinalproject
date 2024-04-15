@@ -91,7 +91,8 @@ const TimetableTab = () => {
           <input
             type="time"
             className='w-64 h-14 text-2xl text-center'
-            {...register('time', {required: true})}
+            {...register('time', { required: true })}
+
           />
         </div>
         <div className='flex flex-row mt-4'>

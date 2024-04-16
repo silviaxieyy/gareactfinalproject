@@ -15,7 +15,11 @@ const Why = () => {
             <p className='w-3/5 mx-40 mt-4 text-gray-700'>We offer the most open, inclusive, empathetic, supportive fitness experience
                to every member at every level. Whether you are an absolute beginner or workout regularly, 
                our gyms are spaces that you will feel comfortable in.</p>
-               <button className="border border-solid rounded-md w-48 bg-blue-400 mt-4 p-1">Find Your Local club</button>
+            
+            <Link href='/join-now'>
+              <button className="border border-solid rounded-md w-48 h-12 text-xl text-white bg-blue-500 mt-4 p-1">Try us for free</button>
+            </Link>
+
             <div className="flex flex-row items-center mx-auto px-2">
               <img
                 src="https://cdn.pixabay.com/photo/2021/01/04/06/21/fitness-5886573_1280.jpg"
@@ -35,9 +39,9 @@ const Why = () => {
               />
 
             </div>
-            <Link href='/join-now'>
-              <button className="border border-solid rounded-md w-32 bg-blue-500 mt-4 p-1">Try us for free</button>
-            </Link>
+            <button className="border border-solid rounded-md w-48 h-12 text-white bg-blue-400 mt-4 p-1">
+              Find Your Local club
+            </button>
           </div>
           
         </main>

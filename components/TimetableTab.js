@@ -130,7 +130,7 @@ const TimetableTab = () => {
         <div className='flex justify-between mt-6'>
           <div></div>
           <button type="submit"
-            className="border border-solid rounded-xl w-48 text-2xl h-14 bg-sky-400"
+            className="border border-solid rounded-xl w-48 text-white text-2xl h-14 bg-sky-400"
           >
             Submit
           </button>

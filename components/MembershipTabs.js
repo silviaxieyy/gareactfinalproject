@@ -22,14 +22,14 @@ export default function MembershipTabs() {
         id: 'Blue-Basic',
         title: 'Access one gym and amenities only',
         price: '$19.9',
-        period: "per week",
+        term: "per week",
         starting: '4 weeks at least',
       },
       {
         id: 'Blue-Premium',
         title: 'Access one gym and amenities with training classes',
         price: '$22.9',
-        period: "per week",
+        term: "per week",
         starting: '4 weeks at least',
       }
     ],
@@ -38,14 +38,14 @@ export default function MembershipTabs() {
         id: 'Platnum-Basic',
         title: 'Access three gyms and amenities only',
         price: '$22.9',
-        period: "per week",
+        term: "per week",
         starting: '4 weeks at least',
       },
       {
         id: 'Platnum-Premium',
         title: 'Access to statewide gyms and amenities with training classes',
         price: '$26.9',
-        period: "per week",
+        term: "per week",
         starting: '4 weeks at least',
       },
     ],
@@ -54,14 +54,14 @@ export default function MembershipTabs() {
         id: 'Plus-Basic',
         title: 'Access to nationwide gyms and amenities',
         price: '$30.9',
-        period: "per week",
+        term: "per week",
         starting: '4 weeks at least',
       },
       {
         id: 'Plus-Ultimate',
         title: 'Access to nationwide gyms, amenities with training classes',
         price: '33.9',
-        period: "per week",
+        term: "per week",
         starting: '4 weeks at least',
       },
     ],
@@ -127,7 +127,7 @@ export default function MembershipTabs() {
                         <ul className="mt-1 flex flex-wraps items-center space-x-1 text-base font-normal leading-4 text-gray-500">
                           <li className='lg:text-2xl md:text-lg sm:text-lg text-cyan-400 mx-6 mt-5'>AUD {membership.price}</li>
                           <li className='lg:text-2xl md:text-lg sm:text-lg mt-5 mx-6'>&middot;</li>
-                          <li className='lg:text-2xl md:text-lg sm:text-lg mt-5 mx-6'>{membership.period}</li>
+                          <li className='lg:text-2xl md:text-lg sm:text-lg mt-5 mx-6'>{membership.term}</li>
                           <li className='lg:text-2xl md:text-lg sm:text-lg mt-5 mx-6'>&middot;</li>
                           <li className='lg:text-2xl md:text-lg sm:text-lg mt-5 mx-6'>{membership.starting} </li>
                         </ul>
@@ -168,7 +168,7 @@ export default function MembershipTabs() {
                   <li className='mt-2 text-xl text-gray-700'>Level:  {selectedMembership.id}</li>
                   <li className='mt-2 text-xl text-blue-400'>Price:  {selectedMembership.price}</li>
                   <li className='mt-2 text-xl text-gray-700'>Detail: {selectedMembership.title}</li>
-                  <li className='mt-2 text-xl text-gray-700'>Period: {selectedMembership.period}</li>
+                  <li className='mt-2 text-xl text-gray-700'>Term: {selectedMembership.term}</li>
                   <li className='mt-2 text-xl text-gray-700'>Starting: {selectedMembership.starting}</li>
                 </ul>)
                 }

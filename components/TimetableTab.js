@@ -82,7 +82,7 @@ const TimetableTab = () => {
             {...register('date', { required: true })}
             onChange={handleDateChange}
             minDate={currentDate}
-            dateFormat="dd-MM-YYYY"
+            dateFormat="dd-MM-yyyy"
             required
           />
         </div>

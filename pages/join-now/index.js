@@ -3,13 +3,17 @@ import { useForm } from 'react-hook-form';
 import DashboardLayout from '../../components/Layout';
 import Comfirm from '../../components/Comfirm';
 import emailjs from '@emailjs/browser';
-import { useSession } from "next-auth/react"
+import { useSession } from "next-auth/react";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const JoinNowForm = () => {
   const { 
     register, 
     handleSubmit,
-    reset, 
+    reset,
+    setValue,
+    watch, 
     formState: { errors, isSubmitting } 
   } = useForm();
 
@@ -29,7 +33,7 @@ const JoinNowForm = () => {
     setFormData(data);
     setIsComfirmOpen(true);
 
-/*     const {first_name, Card Type, email,mobile_number, card_type } = data; */
+/*     const {first_name, term, email,mobile_number, card_type } = data; */
 
     emailjs.sendForm('service_1sf9wj1', 'template_l46463y', form.current, 'Rl-c-JtkBhUn5hgG_')
       .then((result) => {
@@ -45,14 +49,15 @@ const JoinNowForm = () => {
         <h1 className='font-russo-one text-center mt-5 text-4xl font-bold text-gray-400'>
           Welcome to Join us
         </h1>
-        <div className='flex mt-10 mx-10'>
-          <div className='w-2/3'>
+        <div className='flex mt-3 mx-10'>
+          <div className='lg:w-2/3 md:min-w-96 sm:min-w-64'>
             <div className='flex flex-col justify-center p-4 text-2xl
               mx-20 w-3/5 rounded-lg bg-blue-100'>
               <form 
                 ref={form}
                 onSubmit={handleSubmit(onSubmit)}
-                className='mt-6 w-full'
+                className='w-full'
+                noValidate
               >
                 <div className="my-8 flex flex-row justify-center items-center gap-5">
                   <label className="text-violet11 w-32 text-left whitespace-nowrap text-2xl">
@@ -61,13 +66,13 @@ const JoinNowForm = () => {
                   {session ?
                     <input 
                       type='text'
-                      className='w-3/5 min-h-10 text-xl text-center'
+                      className='lg:w-80 md:w-64 sm:w-48 min-h-12 text-xl text-center'
                       defaultValue={session.user.name}
                       {...register('name', {required: true})}
                     />
                     : <input
                         type='text'
-                        className='w-3/5 min-h-10 text-xl text-center'
+                        className='lg:w-80 md:w-64 sm:w-48 min-h-12 text-xl text-center'
                         {...register('name', {required: true})}
                       />
                   }
@@ -81,48 +86,100 @@ const JoinNowForm = () => {
                     <input
                       type='email'
                       id='email'
-                      className='w-3/5 min-h-10 text-xl text-center'
+                      className='lg:w-80 md:w-64 sm:w-48 min-h-12 text-xl text-center'
                       defaultValue={session.user.email}
                       {...register('email', {required: true})}
                     />
                     : <input
                         type='email'
-                        className='w-3/5 min-h-10 text-xl text-center'
+                        className='lg:w-80 md:w-64 sm:w-48 min-h-12 text-xl text-center'
                         {...register('email', {required: true})}
                       />
                   }
                 </div>
 
-{/*                 <div className="my-8 flex flex-row justify-center items-center gap-5">
+{/*                <div className="my-8 flex flex-row justify-center items-center gap-5">
                   <label className="text-violet11 w-32 text-left whitespace-nowrap text-2xl">
                       Mobile
                   </label>
                   <input 
-                    type="text"
+                    type="tel"
                     id="mobile-number"
                     className='w-3/5 min-h-10 text-xl text-center'
-                    placeholder="Mobile number" 
-                    {...register("mobile_number", {
-                      required: true, 
-                      pattern: {
-                        value: /^[0-9]{8-10}$/
-                      }
-                    })}
+                    placeholder="Mobile number"
+                    pattern="^\d{10}$" 
+                    {...register("mobile_number", {required: true})}
+                    noValidate
                   />
                 </div> */}
 
                 <div className="my-8 flex flex-row justify-center items-center gap-5">
                   <label className="text-violet11 w-32 text-left whitespace-nowrap text-2xl">
-                      Card Type
+                    Gender
                   </label>
                   <select 
-                    id="card-type" 
-                    {...register("card_type", { required: true })}
-                    className='w-3/5 text-center'
+                    id="gender" 
+                    {...register("gender", { required: true })}
+                    className='lg:w-80 md:w-64 sm:w-48 min-h-12 text-center'
+                  >
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Prefer not to say">Prefer not to say</option>
+                  </select>
+                </div>
+                
+                <div className="my-8 flex flex-row justify-center items-center gap-5">
+                  <label className="text-violet11 w-32 text-left whitespace-nowrap text-2xl">
+                    Date of Birth
+                  </label>
+                  <div className='min-h-12 text-xl text-center'>
+                    <DatePicker
+                      className='lg:w-80 md:w-48 sm:w-32 min-h-12 w-64 text-xl text-center'
+                      selected={watch('date')}
+                      {...register('date', { required: true })}
+                      onChange={(date) => setValue('date', date)}
+                      dateFormat="dd-MM-yyyy"
+                      showYearDropdown
+                      scrollableYearDropdown
+                      showMonthDropdown
+                      scrollableMonthDropdown
+                      yearDropdownItemNumber={60}
+                      minDate={new Date(1950, 0, 1)}
+                      maxDate={new Date(2006, 11, 31)}
+                      required
+                    />
+                  </div>
+                 </div>
+
+                <div className="my-8 flex flex-row justify-center items-center gap-5">
+                  <label className="text-violet11 w-32 text-left whitespace-nowrap text-2xl">
+                    State
+                  </label>
+                  <select 
+                    id="state" 
+                    {...register("state", { required: true })}
+                    className='lg:w-80 md:w-64 sm:w-48 min-h-12 w-64 text-center'
+                  >
+                    <option value="VIC">VIC</option>
+                    <option value="QLD">QLD</option>
+                    <option value="NSW">NSW</option>
+                    <option value="SA">SA</option>
+                    <option value="WA">WA</option>
+                  </select>
+                </div>
+
+                <div className="my-8 flex flex-row justify-center items-center gap-5">
+                  <label className="text-violet11 w-32 text-left whitespace-nowrap text-2xl">
+                      Term
+                  </label>
+                  <select 
+                    id="term" 
+                    {...register("term", { required: true })}
+                    className='lg:w-80 md:w-64 sm:w-48 min-h-12 text-center'
                   >
                     <option value="weekly">Weekly</option>
                     <option value="Monthly">Monthly</option>
-                    <option value="Annually">Anually</option>
+                    <option value="Annually">Annually</option>
                   </select>
                 </div>
                 <div className='flex justify-between'>
@@ -140,7 +197,7 @@ const JoinNowForm = () => {
             </div>
           </div>
           <div className='w-1/3 mx-10'>
-            <div className="w-full max-w-md min-w-md transform mx-5 
+            <div className="lg:w-full md:max-w-md transform mx-5 
               overflow-hidden rounded-2xl bg-white p-6 text-left align-middle 
               shadow-xl transition-all">
               <p
@@ -158,7 +215,10 @@ const JoinNowForm = () => {
                   <ul>
                     <li className='mt-5 text-xl'>Full Name : {session ? session.user.name : formData.name}</li>
                     <li className='mt-5 text-xl'>Email : {session ? session.user.email : formData.email}</li>
-                    <li className='mt-5 text-xl'>Card Type : {formData?.card_type}</li>
+                    <li className='mt-5 text-xl'>Gender : {watch('gender')}</li>
+                    <li className='mt-5 text-xl'>Date of Birth : {watch('date')?.toLocaleDateString()}</li>
+                    <li className='mt-5 text-xl'>State : {watch('state')}</li>
+                    <li className='mt-5 text-xl'>Term : {watch('term')}</li>
                   </ul>
                 )
                 }

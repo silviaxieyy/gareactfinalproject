@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react'
+import { useState } from 'react'
 import { Tab } from '@headlessui/react'
 import Link from 'next/link'
 
@@ -8,12 +8,8 @@ function classNames(...classes) {
 
 
 export default function MembershipTabs() {
-  const [selectedCategory, setSelectedCategory] = useState('BLUE');
+  const [selectedCategory, setSelectedCategory] = useState();
   const [selectedMembership, setSelectedMembership] = useState();
-
-  useEffect(() => {
-    console.log("selectedMembership: ", selectedMembership)
-  },[selectedMembership])
 
   const [categories] = useState({
     BLUE: [
@@ -74,9 +70,6 @@ export default function MembershipTabs() {
 
   const handleMembershipClick = (membership) => {
     setSelectedMembership(membership)
-    console.log(membership)
-    console.log(membership.title)
-    console.log(membership.price)
   }
 
   return (

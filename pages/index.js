@@ -29,7 +29,7 @@ export default function Home() {
 
             </div>
             <Link href='/join-now'>
-              <button className="border border-solid rounded-md w-32 bg-blue-500 mt-4 p-1">Try us for free</button>
+              <button className="border border-solid text-2xl text-white rounded-md w-48 bg-blue-500 mt-4 p-1">Try us for free</button>
             </Link>
           </div>
           

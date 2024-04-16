@@ -131,6 +131,7 @@ const TimetableTab = () => {
           <div></div>
           <button type="submit"
             className="border border-solid rounded-xl w-48 text-white text-2xl h-14 bg-sky-400"
+            disabled={isSubmitting}         
           >
             Submit
           </button>

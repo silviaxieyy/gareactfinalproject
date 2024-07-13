@@ -1,9 +1,14 @@
+import Head from 'next/head'
 import DashboardLayout from "../components/Layout";
 import Link from 'next/link';
 
 export default function Home() {
   return (
-    <>
+    <>å
+      <Head>
+        <title>Home - Superfit Training</title>
+        <meta name="description" content="Good for your training, superfit for your health. Join us for free and improve your fitness." />
+      </Head>
       <DashboardLayout>
         <main>
           <div className="flex flex-col items-center mt-6">
